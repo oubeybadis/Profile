@@ -129,7 +129,7 @@ function App() {
               alt="Amar Neche"
               className="w-48 h-48 rounded-full mx-auto mb-8 border-4 border-amber-500 shadow-xl"
             />
-            <h1 className="text-4xl font-bold mb-4">Amar Neche</h1>
+            <h1 className="text-4xl font-bold mb-4">Oubey Badis</h1>
             <div className="inline-block bg-amber-500 text-gray-900 px-4 py-2 rounded-full mb-6 shadow-lg">
               Software Engineer | Laravel 
             </div>
