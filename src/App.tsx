@@ -204,11 +204,11 @@ function App() {
 
         {/* About Section */}
         <section id="about" className={activeSection === 'about' ? 'block' : 'hidden'}>
-          <h2 className="text-3xl font-bold mb-8">About Me</h2>
-          <div className={`rounded-lg p-8 shadow-lg transition-colors duration-200 ${isDarkMode ? 'bg-slate-900' : 'bg-white'}`}>
-          <div className="max-w-3xl mx-auto p-6 bg-gray-900 text-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold text-yellow-400">Oubey Badis</h1>
-      <p className="text-gray-300">Software Engineer | Backend Developer | AI Enthusiast</p>
+  <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-black'}`}>About Me</h2>
+  <div className={`rounded-lg p-8 shadow-lg transition-colors duration-200 ${isDarkMode ? 'bg-slate-900' : 'bg-white'}`}>
+    <div className={`max-w-3xl mx-auto p-6 rounded-lg shadow-lg ${isDarkMode ? 'bg-slate-800' : 'bg-gray-100'}`}>
+      <h1 className={`text-3xl font-bold ${isDarkMode ? 'text-yellow-400' : 'text-amber-600'}`}>Oubey Badis</h1>
+      <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Software Engineer | Backend Developer | AI Enthusiast</p>
 
       <div className="flex flex-wrap gap-2 mt-4">
         <img src="https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" />
@@ -217,8 +217,8 @@ function App() {
       </div>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-semibold text-yellow-400">🎓 Education</h2>
-        <p>
+        <h2 className={`text-2xl font-semibold ${isDarkMode ? 'text-yellow-400' : 'text-amber-600'}`}>🎓 Education</h2>
+        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>
           Master's in Software Engineering (Ongoing) - University of Blida, Algeria
           <br />
           Bachelor's in Networks & Telecommunications Engineering - USTHB, Algeria
@@ -226,8 +226,8 @@ function App() {
       </section>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-semibold text-yellow-400">💻 Skills</h2>
-        <ul className="list-disc ml-5">
+        <h2 className={`text-2xl font-semibold ${isDarkMode ? 'text-yellow-400' : 'text-amber-600'}`}>💻 Skills</h2>
+        <ul className={`list-disc ml-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           <li>Backend: Laravel, RESTful APIs, Docker</li>
           <li>Frontend: TailwindCSS, UI/UX</li>
           <li>Database: MySQL</li>
@@ -237,8 +237,8 @@ function App() {
       </section>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-semibold text-yellow-400">🚀 Projects</h2>
-        <ul className="list-disc ml-5">
+        <h2 className={`text-2xl font-semibold ${isDarkMode ? 'text-yellow-400' : 'text-amber-600'}`}>🚀 Projects</h2>
+        <ul className={`list-disc ml-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           <li>Setram Ticketing System - Web-based ticketing solution</li>
           <li>Coding Game API - Dockerized backend API for ITC Club</li>
           <li>E-Commerce Platform - Secure & scalable e-commerce system</li>
@@ -248,33 +248,34 @@ function App() {
       </section>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-semibold text-yellow-400">📖 Learning</h2>
-        <ul className="list-disc ml-5">
+        <h2 className={`text-2xl font-semibold ${isDarkMode ? 'text-yellow-400' : 'text-amber-600'}`}>📖 Learning</h2>
+        <ul className={`list-disc ml-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           <li>Deep Learning: CNN, RNN, GANs, GNNs</li>
           <li>API-First Design with Apidog</li>
         </ul>
       </section>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-semibold text-yellow-400">🤝 Let's Connect!</h2>
-        <p>
-          📍 Algeria | 📧 <a href="mailto:oubeybadis20@gmail.com" className="text-yellow-400">oubeybadis20@gmail.com</a>
+        <h2 className={`text-2xl font-semibold ${isDarkMode ? 'text-yellow-400' : 'text-amber-600'}`}>🤝 Let's Connect!</h2>
+        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>
+          📍 Algeria | 📧 <a href="mailto:oubeybadis20@gmail.com" className={isDarkMode ? 'text-yellow-400' : 'text-amber-600'}>oubeybadis20@gmail.com</a>
           <br />
-          📞 0549828623 | 🌐 <a href="https://www.linkedin.com/in/oubey-badis-7b7700342/" className="text-yellow-400">LinkedIn</a>
+          📞 0549828623 | 🌐 <a href="https://www.linkedin.com/in/oubey-badis-7b7700342/" className={isDarkMode ? 'text-yellow-400' : 'text-amber-600'}>LinkedIn</a>
         </p>
       </section>
     </div>
-            <h3 className="text-xl font-bold mb-4">Tech Stack</h3>
-            <div className="flex flex-wrap gap-3">
-              {techStack.map((tech, index) => (
-                <span key={index} className={`px-4 py-2 rounded-full text-sm transition-colors duration-200 
-                  ${isDarkMode ? 'bg-slate-800 text-gray-300' : 'bg-gray-100 text-gray-800'}`}>
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+
+    <h3 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>Tech Stack</h3>
+    <div className="flex flex-wrap gap-3">
+      {techStack.map((tech, index) => (
+        <span key={index} className={`px-4 py-2 rounded-full text-sm transition-colors duration-200 
+          ${isDarkMode ? 'bg-slate-800 text-gray-300' : 'bg-gray-100 text-gray-800'}`}>
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
       </main>
 
       {/* Footer */}
