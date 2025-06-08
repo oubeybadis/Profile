@@ -79,7 +79,7 @@ function App() {
     <div className={`min-h-screen transition-colors duration-200 ${isDarkMode ? 'bg-slate-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       {/* Sidebar Navigation */}
       <nav className={`fixed left-0 top-0 h-full w-20 md:w-64 p-4 flex flex-col transition-colors duration-200 ${isDarkMode ? 'bg-slate-900' : 'bg-white shadow-lg'}`}>
-        <div className="flex items-center justify-center md:justify-start space-x-3 mb-10">
+        <div className="flex items-center justify-center md:justify-start space-x-3 mb-10 object-cover">
           <img 
             src="/profile.jpg" 
             alt="Logo" 
@@ -127,7 +127,7 @@ function App() {
             <img
               src="/profile.jpg"
               alt="Amar Neche"
-              className="w-48 h-48 rounded-full mx-auto mt-12 mb-8 border-4 border-amber-500 shadow-xl"
+              className="w-80 h-80 rounded-full mx-auto mt-12 mb-8 border-2 border-amber-500 shadow-xl object-cover p-1 "
             />
             <h1 className="text-4xl font-bold mb-4">Oubey Badis</h1>
             <div className="inline-block bg-amber-500 text-gray-900 px-4 py-2 rounded-full mb-6 shadow-lg">
