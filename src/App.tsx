@@ -78,60 +78,31 @@ function App() {
 
   return (
     <div className={`min-h-screen flex flex-col transition-colors duration-200 ${isDarkMode ? 'bg-slate-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-      {/* Mobile Navbar */}
-      <div className="md:hidden fixed top-0 left-0 w-full z-30 flex items-center justify-between px-4 py-3 bg-slate-900/90 shadow-lg">
-        <div className="flex items-center space-x-2">
-          <img src="/profile.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover" />
-          <span className="font-bold text-lg">Oubey Badis</span>
-        </div>
-        <button
-          aria-label="Open navigation menu"
-          className="focus:outline-none p-2 rounded hover:bg-slate-800 transition active:scale-95"
-          onClick={() => setMobileNavOpen(true)}
-        >
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
-        </button>
-      </div>
-      {/* Mobile Slide-in Menu */}
-      <div className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} md:hidden`} onClick={() => setMobileNavOpen(false)}></div>
-      <nav className={`fixed top-0 left-0 h-full w-64 bg-slate-900 shadow-lg z-50 transform transition-transform duration-300 md:hidden ${mobileNavOpen ? 'translate-x-0' : '-translate-x-full'}`} aria-label="Mobile navigation">
-        <div className="flex items-center justify-between px-4 py-4 border-b border-slate-800">
-          <div className="flex items-center space-x-2">
-            <img src="/profile.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover" />
-            <span className="font-bold text-lg">Oubey Badis</span>
-          </div>
+      {/* Mobile Bottom Navigation */}
+      <nav className={`md:hidden fixed bottom-0 left-0 w-full z-30 ${isDarkMode ? 'bg-slate-900' : 'bg-white'} border-t ${isDarkMode ? 'border-slate-800' : 'border-slate-200'} shadow-2xl flex justify-around items-center py-2 px-1`}> 
+        {[
+          { icon: <Home size={26} />, id: 'home', label: 'Home' },
+          { icon: <User size={26} />, id: 'about', label: 'About' },
+          { icon: <Folder size={26} />, id: 'projects', label: 'Projects' },
+          { icon: <FileText size={26} />, id: 'blog', label: 'Blog' },
+          { icon: isDarkMode ? <Sun size={26} /> : <Moon size={26} />, id: 'theme', label: 'Theme' },
+        ].map((item, idx) => (
           <button
-            aria-label="Close navigation menu"
-            className="focus:outline-none p-2 rounded hover:bg-slate-800 transition active:scale-95"
-            onClick={() => setMobileNavOpen(false)}
+            key={item.id}
+            onClick={() => {
+              if (item.id === 'theme') setIsDarkMode(!isDarkMode);
+              else setActiveSection(item.id);
+            }}
+            className={`flex flex-col items-center justify-center flex-1 py-1 transition-all duration-200 rounded-xl mx-1
+              ${item.id === 'theme' ? '' : activeSection === item.id ? (isDarkMode ? 'bg-yellow-400/90 text-slate-900 shadow-lg scale-110' : 'bg-amber-500/90 text-gray-900 shadow-lg scale-110') : isDarkMode ? 'text-gray-100 hover:bg-slate-800' : 'text-gray-500 hover:bg-slate-100'}
+              ${item.id === 'theme' ? (isDarkMode ? 'text-yellow-400' : 'text-amber-500') : ''}
+            `}
+            aria-label={item.label}
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            {item.icon}
+            <span className="text-xs mt-0.5 font-medium select-none" style={{fontSize: '0.7rem'}}>{item.label}</span>
           </button>
-        </div>
-        <div className="flex flex-col space-y-4 mt-8 px-4">
-          {[
-            { icon: <Home size={24} />, text: 'Home', id: 'home' },
-            { icon: <User size={24} />, text: 'About', id: 'about' },
-            { icon: <Folder size={24} />, text: 'Projects', id: 'projects' },
-            { icon: <FileText size={24} />, text: 'Blog', id: 'blog' }
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => { setActiveSection(item.id); setMobileNavOpen(false); }}
-              className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 text-lg font-medium active:scale-95 ${activeSection === item.id ? 'bg-amber-500 text-gray-900 shadow-lg' : 'hover:bg-slate-800'}`}
-            >
-              {item.icon}
-              <span>{item.text}</span>
-            </button>
-          ))}
-        </div>
-        <button
-          onClick={() => { setIsDarkMode(!isDarkMode); setMobileNavOpen(false); }}
-          className="mt-auto flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 hover:bg-slate-800 w-full justify-center active:scale-95"
-        >
-          {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
-          <span>Toggle Theme</span>
-        </button>
+        ))}
       </nav>
       {/* Desktop Sidebar */}
       <nav className={`hidden md:fixed md:left-0 md:top-0 md:h-full md:w-20 md:w-64 md:p-4 md:flex md:flex-col transition-colors duration-200 z-20 ${isDarkMode ? 'bg-slate-900' : 'bg-white shadow-lg'}`}>
@@ -174,7 +145,7 @@ function App() {
       </nav>
       {/* Main Content + Footer Wrapper */}
       <div className="flex-1 flex flex-col md:flex-row">
-        <main className="flex-1 pt-16 md:pt-0 ml-0 md:ml-64 p-4 md:p-8 transition-all duration-300 flex flex-col justify-center items-center md:items-stretch">
+        <main className="flex-1 pt-16 md:pt-0 ml-0 md:ml-64 p-4 md:p-8 transition-all duration-300 flex flex-col md:items-stretch">
           {/* Hero Section */}
           <section id="home" className={`${activeSection === 'home' ? 'block' : 'hidden'} animate-fade-in`}> 
             <div className="max-w-4xl mx-auto text-center">
@@ -318,7 +289,7 @@ function App() {
               </div>
             </div>
           </section>
-          <footer className={`${isDarkMode ? '' : 'bg-white'}`}>
+          <footer >
         <div className="max-w-4xl mx-auto p-4 md:p-6">
           <p className={`text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
             &copy; {new Date().getFullYear()} Oubey Badis. All rights reserved.
