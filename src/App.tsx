@@ -42,7 +42,7 @@ function App() {
       demo: null,
       detailedDescription: "A comprehensive public transportation management system built with Laravel and Vue.js. Features include real-time ticket booking, route optimization, payment processing, and admin dashboard for fleet management. The system handles thousands of daily transactions with 99.9% uptime.",
       technologies: ["Laravel", "Vue.js", "MySQL", "Redis", "Docker"],
-      images: ["/setram.png", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60", "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60"]
+      images: ["/strm1.png","/strm2.PNG","/strm3.PNG","/strm4.PNG","/strm5.PNG"]
     },
     {
       title: "Coding Game API",
@@ -78,8 +78,8 @@ function App() {
       title: "AI-Based Food Ingredient Prediction",
       description: "Developed a machine learning model to predict food ingredients using AI for enhanced food safety and nutrition analysis.",
       image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=60",
-      github: "https://github.com/oubeybadis/food-ingredient-prediction",
-      demo: "https://food-ai.demo.com",
+      github: "https://github.com/oubeybadis/Ai-food",
+      demo: "https://aifoodpredict.streamlit.app/",
       detailedDescription: "An AI-powered application that analyzes food images to predict ingredients and nutritional information. Uses deep learning models trained on a dataset of 50,000+ food images. Provides detailed nutritional breakdown, allergen warnings, and dietary recommendations.",
       technologies: ["Python", "TensorFlow", "Laravel", "Vue.js", "Docker"],
       images: ["https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=60", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60"]
