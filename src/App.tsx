@@ -70,6 +70,11 @@ function App() {
     }
   }, []);
 
+  // Scroll to top when section changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeSection]);
+
   const projects: Project[] = [
     
     {
