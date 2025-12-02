@@ -206,33 +206,35 @@ function App() {
   return (
     <div className={`min-h-screen flex flex-col transition-colors duration-200 ${isDarkMode ? 'bg-slate-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       {/* Mobile Bottom Navigation */}
-      <nav className={`md:hidden fixed bottom-0 left-0 w-full z-30 ${isDarkMode ? 'bg-slate-900' : 'bg-white'} border-t ${isDarkMode ? 'border-slate-800' : 'border-slate-200'} shadow-2xl flex justify-around items-center py-2 px-1`}> 
-        {[
-          { icon: <Home size={26} />, id: 'home', label: 'Home' },
-          { icon: <User size={26} />, id: 'about', label: 'About' },
-          { icon: <Folder size={26} />, id: 'projects', label: 'Projects' },
-          { icon: <FileText size={26} />, id: 'blog', label: 'Blog' },
-          { icon: isDarkMode ? <Sun size={26} /> : <Moon size={26} />, id: 'theme', label: 'Theme' },
-        ].map((item, idx) => (
-          <button
-            key={item.id}
-            onClick={() => {
-              if (item.id === 'theme') toggleTheme();
-              else setActiveSection(item.id);
-            }}
-            className={`flex flex-col items-center justify-center flex-1 py-1 transition-all duration-200 rounded-xl mx-1
-              ${item.id === 'theme' ? '' : activeSection === item.id ? (isDarkMode ? 'bg-yellow-400/90 text-slate-900 shadow-lg scale-110' : 'bg-amber-500/90 text-gray-900 shadow-lg scale-110') : isDarkMode ? 'text-gray-100 hover:bg-slate-800' : 'text-gray-500 hover:bg-slate-100'}
-              ${item.id === 'theme' ? (isDarkMode ? 'text-yellow-400' : 'text-amber-500') : ''}
-            `}
-            aria-label={item.label}
-          >
-            {item.icon}
-            <span className="text-xs mt-0.5 font-medium select-none" style={{fontSize: '0.7rem'}}>{item.label}</span>
-          </button>
-        ))}
+      <nav className={`md:hidden fixed bottom-0 left-0 right-0 z-30 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} border-t shadow-2xl safe-area-inset-bottom`}> 
+        <div className="flex justify-around items-center py-3 px-1 max-w-full overflow-x-auto">
+          {[
+            { icon: <Home size={24} />, id: 'home', label: 'Home' },
+            { icon: <User size={24} />, id: 'about', label: 'About' },
+            { icon: <Folder size={24} />, id: 'projects', label: 'Projects' },
+            { icon: <FileText size={24} />, id: 'blog', label: 'Blog' },
+            { icon: isDarkMode ? <Sun size={24} /> : <Moon size={24} />, id: 'theme', label: 'Theme' },
+          ].map((item, idx) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                if (item.id === 'theme') toggleTheme();
+                else setActiveSection(item.id);
+              }}
+              className={`flex flex-col items-center justify-center flex-1 min-w-[60px] py-2 px-2 transition-all duration-200 rounded-lg mx-0.5 active:scale-95
+                ${item.id === 'theme' ? '' : activeSection === item.id ? (isDarkMode ? 'bg-yellow-400/90 text-slate-900 shadow-md' : 'bg-amber-500/90 text-gray-900 shadow-md') : isDarkMode ? 'text-gray-300 hover:bg-slate-800' : 'text-gray-500 hover:bg-slate-100'}
+                ${item.id === 'theme' ? (isDarkMode ? 'text-yellow-400 hover:bg-slate-800' : 'text-amber-500 hover:bg-slate-100') : ''}
+              `}
+              aria-label={item.label}
+            >
+              {item.icon}
+              <span className="text-xs mt-1 font-medium select-none leading-tight">{item.label}</span>
+            </button>
+          ))}
+        </div>
       </nav>
       {/* Desktop Sidebar */}
-      <nav className={`hidden md:fixed md:left-0 md:top-0 md:h-full md:w-20 md:w-64 md:p-4 md:flex md:flex-col transition-colors duration-200 z-20 ${isDarkMode ? 'bg-slate-900' : 'bg-white shadow-lg'}`}>
+      <nav className={`hidden md:fixed md:left-0 md:top-0 md:h-full md:w-64 md:p-4 md:flex md:flex-col transition-colors duration-200 z-20 ${isDarkMode ? 'bg-slate-900' : 'bg-white shadow-lg'}`}>
         <div className="flex items-center justify-center md:justify-start space-x-3 mb-10 object-cover">
           <img 
             src="/profile.jpg" 
@@ -271,31 +273,31 @@ function App() {
         </button>
       </nav>
       {/* Main Content + Footer Wrapper */}
-      <div className="flex-1 flex flex-col md:flex-row">
-        <main className="flex-1 pt-16 md:pt-0 ml-0 md:ml-64 p-4 md:p-8 transition-all duration-300 flex flex-col md:items-stretch">
+      <div className="flex-1 flex flex-col md:flex-row pb-20 md:pb-0">
+        <main className="flex-1 pt-0 md:pt-0 md:ml-64 px-3 sm:px-4 md:px-8 py-4 md:py-8 transition-all duration-300 flex flex-col md:items-stretch">
           {/* Hero Section */}
-          <section id="home" className={`${activeSection === 'home' ? 'block' : 'hidden'} animate-fade-in`}> 
+          <section id="home" className={`${activeSection === 'home' ? 'block' : 'hidden'} animate-fade-in w-full`}> 
             <div className="max-w-4xl mx-auto text-center">
               <img
                 src="/profile.jpg"
                 alt="Amar Neche"
-                className="w-40 h-40 md:w-80 md:h-80 rounded-full mx-auto mt-8 md:mt-12 mb-6 md:mb-8 border-2 border-amber-500 shadow-xl object-cover p-1 animate-fade-in"
+                className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 rounded-full mx-auto mt-4 sm:mt-8 md:mt-12 mb-4 sm:mb-6 md:mb-8 border-2 border-amber-500 shadow-xl object-cover p-1 animate-fade-in"
               />
-              <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 animate-fade-in">Oubey Badis</h1>
-              <div className="inline-block bg-amber-500 text-gray-900 px-3 py-1 md:px-4 md:py-2 rounded-full mb-4 md:mb-6 shadow-lg animate-fade-in">
+              <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 animate-fade-in">Oubey Badis</h1>
+              <div className="inline-block bg-amber-500 text-gray-900 px-2 sm:px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 sm:mb-4 md:mb-6 shadow-lg animate-fade-in text-xs sm:text-sm">
                 Software Engineer | Laravel | Flutter
               </div>
-              <p className={`text-base md:text-lg mb-6 md:mb-8 leading-relaxed animate-fade-in
-                md:max-w-2xl md:mx-auto md:tracking-wide md:leading-8  md:px-2 ${!isDarkMode ? 'text-slate-900' : 'text-white'}`}>
+              <p className={`text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed animate-fade-in px-2
+                md:max-w-2xl md:mx-auto md:tracking-wide md:leading-8 ${!isDarkMode ? 'text-slate-900' : 'text-white'}`}>
                  Hi! I'm a Software Engineer with a Bachelor's degree in Networks and Telecommunications Engineering from USTHB, Algeria, and I'm currently pursuing a Master's in Software Engineering.<br />
                 With over 2 years of experience as a fullstack developer, I specialize in designing scalable RESTful APIs and mobile applications using Flutter.<br />
                 I'm passionate about problem-solving 🧩 and writing clean, scalable code. I'm always ready to turn business challenges into tech solutions , and I'm excited for the next challenge! 
               </p>
-              <div className="flex justify-center space-x-6 mb-6 md:mb-8 animate-fade-in">
+              <div className="flex justify-center space-x-4 sm:space-x-6 mb-4 sm:mb-6 md:mb-8 animate-fade-in">
                 {[
-                  { icon: <Github size={24} />, link: "https://github.com/oubeybadis" },
-                  { icon: <Linkedin size={24} />, link: "https://www.linkedin.com/in/oubey-badis-7b7700342/" },
-                  { icon: <Twitter size={24} />, link: "#" }
+                  { icon: <Github size={20} className="sm:w-6 sm:h-6" />, link: "https://github.com/oubeybadis" },
+                  { icon: <Linkedin size={20} className="sm:w-6 sm:h-6" />, link: "https://www.linkedin.com/in/oubey-badis-7b7700342/" },
+                  { icon: <Twitter size={20} className="sm:w-6 sm:h-6" />, link: "#" }
                 ].map((social, index) => (
                   <a
                     key={index}
@@ -312,30 +314,30 @@ function App() {
                 href="https://drive.google.com/file/d/1AoX6J9IPU40ZoGcxDt6YO_h6PUcpDOzt/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-amber-500 text-gray-900 px-4 py-2 md:px-6 md:py-3 rounded-lg flex items-center w-fit space-x-2 mx-auto hover:bg-amber-600 transition-colors duration-200 shadow-lg active:scale-95 animate-fade-in"
+                className="bg-amber-500 text-gray-900 px-3 sm:px-4 py-2 md:px-6 md:py-3 rounded-lg flex items-center w-fit space-x-2 mx-auto hover:bg-amber-600 transition-colors duration-200 shadow-lg active:scale-95 animate-fade-in text-sm sm:text-base"
               >
-                <Download size={20} />
+                <Download size={18} className="sm:w-5 sm:h-5" />
                 <span>Download Resume</span>
               </a>
             </div>
           </section>
           {/* Projects Section */}
-          <section id="projects" className={`${activeSection === 'projects' ? 'block' : 'hidden'} animate-fade-in`}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Latest Projects</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+          <section id="projects" className={`${activeSection === 'projects' ? 'block' : 'hidden'} animate-fade-in w-full`}>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 md:mb-8">Latest Projects</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-8">
               {projects.map((project, index) => (
-                <div key={index} className={`rounded-lg overflow-hidden shadow-lg transition-colors duration-200 ${isDarkMode ? 'bg-slate-900' : 'bg-white'} animate-fade-in`}> 
-                  <img src={project.image} alt={project.title} className="w-full h-40 md:h-48 object-cover" />
-                  <div className="p-4 md:p-6">
-                    <h3 className="text-lg md:text-xl font-bold mb-2">{project.title}</h3>
-                    <p className={`mb-3 md:mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
-                    <div className="flex space-x-4">
+                <div key={index} className={`rounded-lg overflow-hidden shadow-lg transition-colors duration-200 hover:shadow-xl ${isDarkMode ? 'bg-slate-900' : 'bg-white'} animate-fade-in flex flex-col h-full`}> 
+                  <img src={project.image} alt={project.title} className="w-full h-32 sm:h-40 md:h-48 object-cover" />
+                  <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col">
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2">{project.title}</h3>
+                    <p className={`mb-3 md:mb-4 flex-1 text-sm sm:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {hasLinks(project) ? (
                         getProjectLinks(project).map((link, linkIndex) => (
                           <a 
                             key={linkIndex}
                             href={link.url} 
-                            className="text-amber-500 hover:text-amber-600 flex items-center transition-colors duration-200 active:scale-90"
+                            className="text-amber-500 hover:text-amber-600 flex items-center transition-colors duration-200 active:scale-90 text-xs sm:text-sm"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -345,9 +347,9 @@ function App() {
                       ) : (
                         <button 
                           onClick={() => openModal(project)}
-                          className="text-amber-500 hover:text-amber-600 flex items-center transition-colors duration-200 active:scale-90"
+                          className="text-amber-500 hover:text-amber-600 flex items-center transition-colors duration-200 active:scale-90 text-xs sm:text-sm"
                         >
-                          <Eye size={20} className="mr-2" /> See More
+                          <Eye size={18} className="mr-1 sm:mr-2" /> See More
                         </button>
                       )}
                     </div>
@@ -357,68 +359,68 @@ function App() {
             </div>
           </section>
           {/* Blog Section */}
-          <section id="blog" className={`${activeSection === 'blog' ? 'block' : 'hidden'} animate-fade-in`}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Latest Posts</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
+          <section id="blog" className={`${activeSection === 'blog' ? 'block' : 'hidden'} animate-fade-in w-full`}>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 md:mb-8">Latest Posts</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-8">
               {blogPosts.map((post, index) => (
-                <div key={index} className={`rounded-lg overflow-hidden shadow-lg transition-colors duration-200 ${isDarkMode ? 'bg-slate-900' : 'bg-white'} animate-fade-in`}>
-                  <img src={post.thumbnail} alt={post.title} className="w-full h-40 md:h-48 object-cover" />
-                  <div className="p-4 md:p-6">
-                    <span className="text-amber-500 text-xs md:text-sm">{post.date}</span>
-                    <h3 className="text-lg md:text-xl font-bold my-2">{post.title}</h3>
-                    <p className={`mb-3 md:mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{post.preview}</p>
-                    <a href="#" className="text-amber-500 hover:text-amber-600 transition-colors duration-200 active:scale-90">Read More →</a>
+                <div key={index} className={`rounded-lg overflow-hidden shadow-lg transition-colors duration-200 hover:shadow-xl ${isDarkMode ? 'bg-slate-900' : 'bg-white'} animate-fade-in flex flex-col h-full`}>
+                  <img src={post.thumbnail} alt={post.title} className="w-full h-32 sm:h-40 md:h-48 object-cover" />
+                  <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col">
+                    <span className="text-amber-500 text-xs sm:text-sm">{post.date}</span>
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold my-1 sm:my-2">{post.title}</h3>
+                    <p className={`mb-3 md:mb-4 flex-1 text-sm sm:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{post.preview}</p>
+                    <a href="#" className="text-amber-500 hover:text-amber-600 transition-colors duration-200 active:scale-90 text-xs sm:text-sm">Read More →</a>
                   </div>
                 </div>
               ))}
             </div>
           </section>
         
-          
+            
           {/* About Section */}
-<section id="about" className={`${activeSection === 'about' ? 'block' : 'hidden'} animate-fade-in`}>
+<section id="about" className={`${activeSection === 'about' ? 'block' : 'hidden'} animate-fade-in w-full`}>
   <div className="max-w-4xl mx-auto">
-    <h2 className={`text-3xl md:text-4xl font-bold mb-6 md:mb-8 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+    <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 md:mb-8 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
       About <span className="text-amber-500">Me</span>
     </h2>
     
     {/* Profile Summary Card */}
-    <div className={`rounded-xl p-6 md:p-8 mb-8 shadow-lg transition-all duration-300 ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
-      <div className="flex flex-col md:flex-row items-start gap-6">
+    <div className={`rounded-xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 shadow-lg transition-all duration-300 ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+      <div className="flex flex-col md:flex-row items-center sm:items-start gap-4 sm:gap-6">
         <img 
           src="/profile.jpg" 
           alt="Oubey Badis" 
-          className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-amber-500 object-cover shadow-md"
+          className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border-2 border-amber-500 object-cover shadow-md flex-shrink-0"
         />
-        <div>
-          <h3 className={`text-2xl md:text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Oubey Badis</h3>
-          <div className={`text-lg md:text-xl mb-3 ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+        <div className="text-center sm:text-left flex-1">
+          <h3 className={`text-lg sm:text-2xl md:text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Oubey Badis</h3>
+          <div className={`text-base sm:text-lg md:text-xl mb-2 sm:mb-3 ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
             Software Engineer | Laravel | Flutter
           </div>
-          <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-4`}>
+          <p className={`text-sm sm:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-3 sm:mb-4`}>
             Passionate software engineer with 2+ years of experience in full-stack development, specializing in Laravel and RESTful APIs. 
             Currently pursuing a Master's in Software Engineering while working on innovative projects that bridge technology and real-world solutions.
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
             <a 
               href="mailto:oubeybadis20@gmail.com" 
-              className={`flex items-center px-3 py-1 rounded-full text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
+              className={`flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
             >
-              ✉️ oubeybadis20@gmail.com
+              ✉️ Email
             </a>
             <a 
               href="tel:+213549828623" 
-              className={`flex items-center px-3 py-1 rounded-full text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
+              className={`flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
             >
-              📞 +213 549 828 623
+              📞 Call
             </a>
             <a 
               href="https://www.linkedin.com/in/oubey-badis-7b7700342/" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center px-3 py-1 rounded-full text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
+              className={`flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
             >
-              <Linkedin size={16} className="mr-1" /> LinkedIn
+              <Linkedin size={14} className="mr-1" /> LinkedIn
             </a>
           </div>
         </div>
@@ -426,27 +428,27 @@ function App() {
     </div>
 
     {/* Education & Experience */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
       {/* Education */}
-      <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
-        <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+      <div className={`rounded-xl p-4 sm:p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+        <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
           Education
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Master's in Software Engineering</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Saad Dahleb University Blida 1 • 2024 - Present</p>
-            <p className={`mt-1 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Master's in Software Engineering</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Saad Dahleb University Blida 1 • 2024 - Present</p>
+            <p className={`mt-1 text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Specializing in software architecture, distributed systems, and microservices architecture.
             </p>
           </div>
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bachelor's in Network & Telecommunications Engineering</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>USTHB, Algiers • 2021 - 2024</p>
-            <p className={`mt-1 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bachelor's in Network & Telecommunications Engineering</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>USTHB, Algiers • 2021 - 2024</p>
+            <p className={`mt-1 text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Comprehensive training in network infrastructure, communication systems, and network security.
             </p>
           </div>
@@ -454,18 +456,18 @@ function App() {
       </div>
 
       {/* Experience */}
-      <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
-        <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+      <div className={`rounded-xl p-4 sm:p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+        <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
           Experience
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Backend Developer - Laravel Specialist</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Freelance / Collaborative Projects • 2023 - Present</p>
-            <ul className={`mt-2 space-y-1 list-disc ml-5 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Backend Developer - Laravel Specialist</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Freelance / Collaborative Projects • 2023 - Present</p>
+            <ul className={`mt-2 space-y-1 list-disc ml-5 text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>Specialized in Laravel API development with 1 year of intensive expertise</li>
               <li>Designed and implemented complete web and mobile applications</li>
               <li>Led development teams on multi-disciplinary projects</li>
@@ -477,51 +479,51 @@ function App() {
     </div>
 
     {/* Skills & Projects */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
       {/* Technical Skills */}
-      <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
-        <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+      <div className={`rounded-xl p-4 sm:p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+        <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
           </svg>
           Technical Skills
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <div>
-            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Backend Development</h4>
+            <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Backend Development</h4>
             <div className="flex flex-wrap gap-2">
               {['Laravel (Expert)', 'RESTful APIs', 'PHP', 'MVC Architecture'].map((skill) => (
-                <span key={skill} className={`px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
+                <span key={skill} className={`px-2 sm:px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
                   {skill}
                 </span>
               ))}
             </div>
           </div>
           <div>
-            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Frontend & Mobile</h4>
+            <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Frontend & Mobile</h4>
             <div className="flex flex-wrap gap-2">
               {['Tailwind CSS', 'Flutter', 'Responsive Design', 'UI/UX'].map((skill) => (
-                <span key={skill} className={`px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
+                <span key={skill} className={`px-2 sm:px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
                   {skill}
                 </span>
               ))}
             </div>
           </div>
           <div>
-            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Infrastructure & DevOps</h4>
+            <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Infrastructure & DevOps</h4>
             <div className="flex flex-wrap gap-2">
               {['Docker', 'Linux', 'Git'].map((skill) => (
-                <span key={skill} className={`px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
+                <span key={skill} className={`px-2 sm:px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
                   {skill}
                 </span>
               ))}
             </div>
           </div>
           <div>
-            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>AI & Emerging Tech</h4>
+            <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>AI & Emerging Tech</h4>
             <div className="flex flex-wrap gap-2">
               {['Machine Learning',  'WebRTC', 'Microservices'].map((skill) => (
-                <span key={skill} className={`px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
+                <span key={skill} className={`px-2 sm:px-3 py-1 rounded-full text-xs ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}>
                   {skill}
                 </span>
               ))}
@@ -531,33 +533,33 @@ function App() {
       </div>
 
       {/* Notable Projects */}
-      <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
-        <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+      <div className={`rounded-xl p-4 sm:p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+        <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
           <Folder className="w-5 h-5 mr-2" />
           Notable Projects
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Integrated Healthcare Mobile App</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Integrated Healthcare Mobile App</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Developed a comprehensive healthcare mobile application with telemedicine features and robust backend architecture.
             </p>
           </div>
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>E-commerce Platform</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>E-commerce Platform</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               End-to-end design of an e-commerce solution with Laravel backend, payment integration, and inventory management.
             </p>
           </div>
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SETRAM Transportation System</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SETRAM Transportation System</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Developed a public transportation management system with complex backend architecture for real-time operations.
             </p>
           </div>
           <div>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>AI Food Ingredient Prediction</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <h4 className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>AI Food Ingredient Prediction</h4>
+            <p className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Machine learning project integrating AI algorithms with Laravel backend for food data analysis.
             </p>
           </div>
@@ -566,17 +568,17 @@ function App() {
     </div>
 
     {/* Professional Skills */}
-    <div className={`rounded-xl p-6 shadow-lg mb-8 ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
-      <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+    <div className={`rounded-xl p-4 sm:p-6 shadow-lg mb-6 sm:mb-8 ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+      <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
         Professional Skills
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
         <div>
-          <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Leadership</h4>
-          <ul className={`space-y-1 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Leadership</h4>
+          <ul className={`space-y-1 text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             <li className="flex items-start">
               <span className="mr-2">•</span> Technical Team Leadership
             </li>
@@ -589,8 +591,8 @@ function App() {
           </ul>
         </div>
         <div>
-          <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Problem Solving</h4>
-          <ul className={`space-y-1 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Problem Solving</h4>
+          <ul className={`space-y-1 text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             <li className="flex items-start">
               <span className="mr-2">•</span> Technical Analysis
             </li>
@@ -603,8 +605,8 @@ function App() {
           </ul>
         </div>
         <div>
-          <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Adaptability</h4>
-          <ul className={`space-y-1 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          <h4 className={`font-semibold mb-2 text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Adaptability</h4>
+          <ul className={`space-y-1 text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             <li className="flex items-start">
               <span className="mr-2">•</span> Rapid Learning
             </li>
@@ -620,44 +622,44 @@ function App() {
     </div>
 
     {/* Languages */}
-    <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-gray-200'}`}>
-      <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+    <div className={`rounded-xl p-4 sm:p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-gray-200'}`}>
+      <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
         </svg>
         Languages
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
         <div>
-          <div className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Arabic</div>
-          <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Native proficiency</div>
+          <div className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Arabic</div>
+          <div className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Native proficiency</div>
         </div>
         <div>
-          <div className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>French</div>
-          <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Fluent (academic & professional)</div>
+          <div className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>French</div>
+          <div className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Fluent (academic & professional)</div>
         </div>
         <div>
-          <div className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>English</div>
-          <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Intermediate (technical communication)</div>
+          <div className={`font-semibold text-sm sm:text-base ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>English</div>
+          <div className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Intermediate (technical communication)</div>
         </div>
       </div>
     </div>
   </div>
 </section>
-          <footer >
-        <div className="max-w-4xl mx-auto p-4 md:p-6">
-          <p className={`text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            &copy; {new Date().getFullYear()} Oubey Badis. All rights reserved.
-          </p>         
-        </div>
-      </footer>
+          <footer className="mt-auto pt-4 md:pt-8 pb-4 md:pb-0">
+            <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 py-3 md:py-6">
+              <p className={`text-center text-xs sm:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                &copy; {new Date().getFullYear()} Oubey Badis. All rights reserved.
+              </p>         
+            </div>
+          </footer>
         </main>
 
       </div>
       
       {/* Project Modal */}
       {isModalOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-4">
           {/* Backdrop */}
           <div 
             className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
@@ -669,29 +671,29 @@ function App() {
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className={`absolute top-4 right-4 z-10 p-2 rounded-full ${isDarkMode ? 'bg-slate-800 text-gray-300 hover:bg-slate-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} transition-colors duration-200`}
+              className={`absolute top-3 sm:top-4 right-3 sm:right-4 z-10 p-2 rounded-full ${isDarkMode ? 'bg-slate-800 text-gray-300 hover:bg-slate-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} transition-colors duration-200`}
             >
-              <X size={24} />
+              <X size={20} className="sm:w-6 sm:h-6" />
             </button>
             
             {/* Modal Header */}
-            <div className="p-6 md:p-8 border-b border-gray-200 dark:border-slate-700">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedProject.title}</h2>
-              <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{selectedProject.description}</p>
+            <div className="p-4 sm:p-6 md:p-8 border-b border-gray-200 dark:border-slate-700">
+              <h2 className="text-lg sm:text-2xl md:text-3xl font-bold mb-2">{selectedProject.title}</h2>
+              <p className={`text-sm sm:text-base md:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{selectedProject.description}</p>
             </div>
             
             {/* Modal Body */}
-            <div className="p-6 md:p-8">
+            <div className="p-4 sm:p-6 md:p-8">
               {/* Project Images */}
               <div className="mb-6">
-                <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Project Screenshots</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Project Screenshots</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {selectedProject.images.map((image, index) => (
                     <div key={index} className="rounded-lg overflow-hidden shadow-lg">
                       <img 
                         src={image} 
                         alt={`${selectedProject.title} screenshot ${index + 1}`}
-                        className="w-full h-48 object-cover hover:scale-105 transition-transform duration-200"
+                        className="w-full h-32 sm:h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-200"
                       />
                     </div>
                   ))}
@@ -700,20 +702,20 @@ function App() {
               
               {/* Detailed Description */}
               <div className="mb-6">
-                <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Detailed Description</h3>
-                <p className={`leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                <h3 className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Detailed Description</h3>
+                <p className={`leading-relaxed text-sm sm:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                   {selectedProject.detailedDescription}
                 </p>
               </div>
               
               {/* Technologies Used */}
               <div className="mb-6">
-                <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Technologies Used</h3>
+                <h3 className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Technologies Used</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech, index) => (
                     <span 
                       key={index} 
-                      className={`px-3 py-1 rounded-full text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}
+                      className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-amber-100 text-amber-800'}`}
                     >
                       {tech}
                     </span>
@@ -724,15 +726,15 @@ function App() {
               {/* Project Links (if any) */}
               {hasLinks(selectedProject) && (
                 <div>
-                  <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Project Links</h3>
-                  <div className="flex flex-wrap gap-4">
+                  <h3 className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Project Links</h3>
+                  <div className="flex flex-wrap gap-2 sm:gap-4">
                     {getProjectLinks(selectedProject).map((link, index) => (
                       <a
                         key={index}
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`flex items-center px-4 py-2 rounded-lg transition-colors duration-200 ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
+                        className={`flex items-center px-3 sm:px-4 py-2 rounded-lg transition-colors duration-200 text-xs sm:text-sm ${isDarkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-gray-100 text-amber-600 hover:bg-gray-200'}`}
                       >
                         {link.icon} {link.label}
                       </a>
