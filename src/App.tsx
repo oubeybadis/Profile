@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Home,
   User,
@@ -27,22 +27,70 @@ interface Project {
 }
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Toggle theme and persist to localStorage
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('theme', next ? 'dark' : 'light');
+      } catch (e) {
+        // ignore
+      }
+      return next;
+    });
+  };
+
+  // On mount: read stored preference or follow browser preference; default to light
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark') {
+        setIsDarkMode(true);
+        return;
+      }
+      if (stored === 'light') {
+        setIsDarkMode(false);
+        return;
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // No stored preference — respect browser if it explicitly prefers dark, otherwise default to light
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+  }, []);
+
   const projects: Project[] = [
+    
     {
-      title: "Setram Ticketing System",
-      description: "Developed a complete web-based ticketing solution for Setram, optimizing public transport accessibility.",
-      image: "/strm1.png",
-      github:null,
-      demo: null,
-      detailedDescription: "A comprehensive public transportation management system built with Laravel and Vue.js. Features include real-time ticket booking, route optimization, payment processing, and admin dashboard for fleet management. The system handles thousands of daily transactions with 99.9% uptime.",
-      technologies: ["Laravel", "Vue.js", "MySQL", "Redis", "Docker"],
-      images: ["/strm1.png","/strm2.PNG","/strm3.PNG","/strm4.PNG","/strm5.PNG"]
+      title: "Tahalile - Medical At-Home Services",
+      description: "A healthcare startup platform connecting patients with medical professionals for at-home services. Flutter mobile app with Laravel backend.",
+      image: "/tahalile.PNG",
+      github: null,
+      demo: "https://tahalile.com/",
+      detailedDescription: "Tahalile is an innovative medical services platform that brings professional healthcare to patients' homes. Built with Flutter for seamless mobile experience and Laravel for robust backend infrastructure. Features include appointment booking, real-time provider tracking, medical history management, secure payment processing, and telehealth consultations.",
+      technologies: ["Flutter", "Laravel", "PostgreSQL", "Firebase", "Stripe API", "WebSocket"],
+      images: ["/tahalile.png", "/tahalile2.png", "/tahalile3.png"]
+    },
+    {
+      title: "Kindergarten Management Platform",
+      description: "A comprehensive full-stack platform for kindergarten administration with student tracking, attendance, and parent communication.",
+      image: "/kindergarten.PNG",
+      github: null,
+      demo: "https://safehugskindergarten.com/",
+      detailedDescription: "A complete kindergarten management system built with Laravel and Vue.js. Features include student information management, attendance tracking, grade reporting, parent-teacher communication portal, fee management, event scheduling, and document management. Designed to streamline administrative tasks and enhance communication between school and parents.",
+      technologies: ["Laravel", "Vue.js", "MySQL", "TailwindCSS", "PDF Generation", "Email Services"],
+      images: ["/kindergarten.png", "/kindergarten2.png", "/kindergarten3.png"]
     },
     {
       title: "Coding Game API",
@@ -54,6 +102,7 @@ function App() {
       technologies: ["Laravel", "Docker", "Redis", "WebSockets", "JWT"],
       images: ["https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60", "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60"]
     },
+    
     {
       title: "E-Commerce Platform",
       description: "Designed a secure and scalable e-commerce system with seamless product management and payment integration.",
@@ -63,6 +112,16 @@ function App() {
       detailedDescription: "A full-featured e-commerce solution with advanced inventory management, multi-payment gateway integration, order tracking, and analytics dashboard. Supports multiple vendors, dynamic pricing, and automated email marketing campaigns.",
       technologies: ["Laravel", "Vue.js", "Stripe API", "PostgreSQL", "AWS S3"],
       images: ["/ecom1.png", "/ecom2.png"]
+    },
+    {
+      title: "Setram Ticketing System",
+      description: "Developed a complete web-based ticketing solution for Setram, optimizing public transport accessibility.",
+      image: "/strm1.png",
+      github:null,
+      demo: null,
+      detailedDescription: "A comprehensive public transportation management system built with Laravel and Vue.js. Features include real-time ticket booking, route optimization, payment processing, and admin dashboard for fleet management. The system handles thousands of daily transactions with 99.9% uptime.",
+      technologies: ["Laravel", "Vue.js", "MySQL", "Redis", "Docker"],
+      images: ["/strm1.png","/strm2.PNG","/strm3.PNG","/strm4.PNG","/strm5.PNG"]
     },
     {
       title: "WebRTC Video Conferencing",
@@ -153,7 +212,7 @@ function App() {
           <button
             key={item.id}
             onClick={() => {
-              if (item.id === 'theme') setIsDarkMode(!isDarkMode);
+              if (item.id === 'theme') toggleTheme();
               else setActiveSection(item.id);
             }}
             className={`flex flex-col items-center justify-center flex-1 py-1 transition-all duration-200 rounded-xl mx-1
@@ -198,7 +257,7 @@ function App() {
           ))}
         </div>
         <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleTheme}
           className={`mt-auto flex items-center space-x-3 p-2 rounded-lg transition-colors duration-200 active:scale-95
             ${isDarkMode ? 'hover:bg-slate-800' : 'hover:bg-gray-100'}`}
         >
@@ -221,11 +280,11 @@ function App() {
               <div className="inline-block bg-amber-500 text-gray-900 px-3 py-1 md:px-4 md:py-2 rounded-full mb-4 md:mb-6 shadow-lg animate-fade-in">
                 Software Engineer | Laravel | Flutter
               </div>
-              <p className="text-base md:text-lg mb-6 md:mb-8 leading-relaxed animate-fade-in
-                md:max-w-2xl md:mx-auto md:tracking-wide md:leading-8 md:text-gray-300 md:px-2">
-                👋 Hi! I'm a Software Engineer with a Bachelor's degree in Networks and Telecommunications Engineering from USTHB, Algeria, and I'm currently pursuing a Master's in Software Engineering.<br />
+              <p className={`text-base md:text-lg mb-6 md:mb-8 leading-relaxed animate-fade-in
+                md:max-w-2xl md:mx-auto md:tracking-wide md:leading-8  md:px-2 ${!isDarkMode ? 'text-slate-900' : 'text-white'}`}>
+                 Hi! I'm a Software Engineer with a Bachelor's degree in Networks and Telecommunications Engineering from USTHB, Algeria, and I'm currently pursuing a Master's in Software Engineering.<br />
                 With over 2 years of experience as a fullstack developer, I specialize in designing scalable RESTful APIs and mobile applications using Flutter.<br />
-                I'm passionate about problem-solving 🧩 and writing clean, scalable code. I'm always ready to turn business challenges into tech solutions 📈, and I'm excited for the next challenge! 🚀
+                I'm passionate about problem-solving 🧩 and writing clean, scalable code. I'm always ready to turn business challenges into tech solutions , and I'm excited for the next challenge! 
               </p>
               <div className="flex justify-center space-x-6 mb-6 md:mb-8 animate-fade-in">
                 {[
@@ -244,10 +303,15 @@ function App() {
                   </a>
                 ))}
               </div>
-              <button className="bg-amber-500 text-gray-900 px-4 py-2 md:px-6 md:py-3 rounded-lg flex items-center space-x-2 mx-auto hover:bg-amber-600 transition-colors duration-200 shadow-lg active:scale-95 animate-fade-in">
+              <a
+                href="https://drive.google.com/file/d/1AoX6J9IPU40ZoGcxDt6YO_h6PUcpDOzt/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-amber-500 text-gray-900 px-4 py-2 md:px-6 md:py-3 rounded-lg flex items-center w-fit space-x-2 mx-auto hover:bg-amber-600 transition-colors duration-200 shadow-lg active:scale-95 animate-fade-in"
+              >
                 <Download size={20} />
                 <span>Download Resume</span>
-              </button>
+              </a>
             </div>
           </section>
           {/* Projects Section */}
@@ -551,7 +615,7 @@ function App() {
     </div>
 
     {/* Languages */}
-    <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-gray-200'}`}>
+    <div className={`rounded-xl p-6 shadow-lg ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-gray-200'}`}>
       <h3 className={`text-xl font-bold mb-4 flex items-center ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
