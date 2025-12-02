@@ -327,7 +327,9 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-8">
               {projects.map((project, index) => (
                 <div key={index} className={`rounded-lg overflow-hidden shadow-lg transition-colors duration-200 hover:shadow-xl ${isDarkMode ? 'bg-slate-900' : 'bg-white'} animate-fade-in flex flex-col h-full`}> 
-                  <img src={project.image} alt={project.title} className="w-full h-32 sm:h-40 md:h-48 object-cover" />
+                  <div className="media-aspect-16x9">
+                    <img src={project.image} alt={project.title} />
+                  </div>
                   <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col">
                     <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2">{project.title}</h3>
                     <p className={`mb-3 md:mb-4 flex-1 text-sm sm:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
@@ -364,7 +366,9 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-8">
               {blogPosts.map((post, index) => (
                 <div key={index} className={`rounded-lg overflow-hidden shadow-lg transition-colors duration-200 hover:shadow-xl ${isDarkMode ? 'bg-slate-900' : 'bg-white'} animate-fade-in flex flex-col h-full`}>
-                  <img src={post.thumbnail} alt={post.title} className="w-full h-32 sm:h-40 md:h-48 object-cover" />
+                  <div className="media-aspect-16x9">
+                    <img src={post.thumbnail} alt={post.title} />
+                  </div>
                   <div className="p-3 sm:p-4 md:p-6 flex-1 flex flex-col">
                     <span className="text-amber-500 text-xs sm:text-sm">{post.date}</span>
                     <h3 className="text-base sm:text-lg md:text-xl font-bold my-1 sm:my-2">{post.title}</h3>
@@ -690,11 +694,13 @@ function App() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {selectedProject.images.map((image, index) => (
                     <div key={index} className="rounded-lg overflow-hidden shadow-lg">
-                      <img 
-                        src={image} 
-                        alt={`${selectedProject.title} screenshot ${index + 1}`}
-                        className="w-full h-32 sm:h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-200"
-                      />
+                      <div className="media-aspect-16x9">
+                        <img 
+                          src={image} 
+                          alt={`${selectedProject.title} screenshot ${index + 1}`}
+                          className="hover:scale-105 transition-transform duration-200"
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
